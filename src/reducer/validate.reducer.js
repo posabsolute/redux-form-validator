@@ -1,11 +1,17 @@
 const initialState = {};
 
 export default function validation(state = initialState, action) {
+  let newState = Object.assign({}, state);
+
   switch (action.type) {
   case 'MODEL_INPUT_VALIDATION':
-    let inputState = Object.assign({}, state);
-    inputState[action.component][action.model][action.inputName] = action.state;
-    return inputState;
+    let inputState = newState[action.component][action.model][action.inputName] || {};
+    newState[action.component][action.model][action.inputName] = {
+      ...inputState,
+      ...action.state,
+    };
+    return newState;
+
 
   case 'MODEL_COMPONENT_DEFAULT_STATE':
     return {
@@ -16,10 +22,12 @@ export default function validation(state = initialState, action) {
     };
 
   case 'MODEL_FORM_VALIDATION':
-    let formState = Object.assign({}, state);
-    formState[action.component][action.model].valid = action.state.valid;
-    formState[action.component][action.model].message = action.state.message;
-    return formState;
+    let modelState = newState[action.component][action.model];
+    newState[action.component][action.model] = {
+      ...modelState,
+      ...action.state,
+    }
+    return newState;
 
   default:
     return state;

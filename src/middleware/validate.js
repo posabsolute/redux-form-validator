@@ -120,17 +120,20 @@ export default store => next => action => {
 
     // is the input has an async validation rule;
     if (inputState.isPromise) {
+      dispatchInputAction({state:'isValidating'}, name);
       // in case any other rules state the input is not valid, reject promise
       if (!inputState.valid) { inputState.promise.reject(inputState); }
 
       // if validation function resolve promise, dispatch a valid action on the input
       inputState.promise.promise.then(() =>{
+        inputState.state = 'done';
         inputState.valid = true;
         dispatchInputAction(inputState, name);
       })
       // if validation fails because of another validation rule or
       // any other rules state the input is not valid, reject promise
       .catch((state) => {
+        inputState.state = 'done';
         inputState.valid = false;
         // other rules pass back an object
         if (typeof state === 'object') {
@@ -222,7 +225,7 @@ export default store => next => action => {
      * @return {Promise} formState.async.promise
      */
     function rejectPromise() {
-      console.log(formState.async.reject)
+      dispatchFormAsyncAction(false);
       formState.async.reject();
       formState.valid = false;
       dispatchFormAction(formState);
@@ -273,6 +276,7 @@ export default store => next => action => {
     function handleFormAsyncValidation() {
       // model has an async function
       if (model.validateAsync) {
+        dispatchFormAction({state:'isValidating'});
         // reject early of form is already not valid
         if (!formState.valid || (model.validate && !model.validate(form, store.dispatch))) {
           return rejectPromise();
@@ -280,8 +284,10 @@ export default store => next => action => {
         // call validate async function & return the promise
         model.validateAsync.call(formState.async, form, store.dispatch);
         formState.async.promise.then(() => {
+          formState.state = 'done';
           dispatchFormAction(formState);
         }).catch((message) => {
+          formState.state = 'done';
           dispatchErrorFormAction(formState, message);
         });
         return formState.async.promise;
