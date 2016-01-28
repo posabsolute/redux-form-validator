@@ -10,10 +10,6 @@ Demo: [Live Example](http://posabsolute.github.io/redux-form-validator-example/)
 Better Documentation: [http://posabsolute.github.io/redux-form-validator](http://posabsolute.github.io/redux-form-validator)
 
 
-## Disclaimer
-
-This is a middleware I am using in my day to day, but it's not currently battle tested in production.
-
 ## Integration
 
 
@@ -76,12 +72,13 @@ export default class LoginComponent extends React.Component {
     return <LoginForm {...this.props} validate={this.validate} />;
   }
 }
+```
 
-5. Add validation to your inputs, there is also an error label component for your convenience. Unfortunately, you cannot use stateless component because the middleware makes use of refs.
+5. Add validation to your inputs, there is also an error label component for your convenience.
 
   a. add {...validate} to your input
   b. add a name to your input (the middleware use the html5 form.elements)
-  c. To get the error class, use className={validate.classes('input-line', 'url')}
+  c. To get the error class on your input, use className={validate.classes('input-line', 'url')}
 
 It should look like:
 ```javascript
