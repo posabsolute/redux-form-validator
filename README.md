@@ -5,7 +5,7 @@ If you are looking for a fully controlled input approach, you should head to red
 
 About controlled inputs:  [My controlled input dilemma with react & redux](http://www.position-absolute.com/?p=5264) 
 
-Demo: [Live Example](http://posabsolute.github.io/redux-form-validator-example/) | [Source](https://github.com/posabsolute/redux-form-validator)
+Demo: [Live Example](http://posabsolute.github.io/redux-form-validator-example/) | [Source](https://github.com/posabsolute/redux-form-validator-example)
 
 Better Documentation: [http://posabsolute.github.io/redux-form-validator](http://posabsolute.github.io/redux-form-validator)
 

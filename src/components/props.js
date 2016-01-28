@@ -77,7 +77,6 @@ const validate = (
       if (store && store[getComponentName()] && store[getComponentName()][model.name] && store[getComponentName()][model.name]) {
         formStore = store[getComponentName()][model.name];
       }
-      console.log(formStore)
       return formStore;
     },
     /**
@@ -129,7 +128,6 @@ const validate = (
      *   @return {Promise} inputState.promise.promise - Return a promise that will trigger a resolved or reject state depending on input validity.
      */
     input: (value, name, inputObject, form) => {
-      console.log(form)
       return component.props.validateInput(value, name, getComponentName(), model, inputObject, form);
     },
     /**
