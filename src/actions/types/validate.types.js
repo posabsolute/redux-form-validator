@@ -1,0 +1,5 @@
+/*
+ * action types
+ */
+
+export const MODEL_COMPONENT_DEFAULT_STATE = 'MODEL_COMPONENT_DEFAULT_STATE';
