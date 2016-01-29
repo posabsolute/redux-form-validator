@@ -99,7 +99,6 @@ export default {
   // Validates that the value has to be a string with length equal to
   // the length value specified
   length(value, rule) {
-    console.log(rule);
     if (typeof value !== 'string' || value.length !== rule) {
       return false;
     }

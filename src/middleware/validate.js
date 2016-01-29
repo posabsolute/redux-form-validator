@@ -70,7 +70,7 @@ export default store => next => action => {
    * @param {Object} state - input state
    */
   function dispatchInputAction(state, name) {
-    store.dispatch({
+    next({
       type: 'MODEL_INPUT_VALIDATION',
       model: model.name,
       component,
@@ -80,7 +80,7 @@ export default store => next => action => {
   }
 
   function dispatchFormAction(formState) {
-    store.dispatch({
+    next({
       type: 'MODEL_FORM_VALIDATION',
       model: model.name,
       component,
