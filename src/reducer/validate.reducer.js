@@ -1,10 +1,12 @@
+import {MODEL_COMPONENT_DEFAULT_STATE, MODEL_INPUT_VALIDATION, MODEL_FORM_VALIDATION} from '../actions/types/validate.types';
+
 const initialState = {};
 
 export default function validation(state = initialState, action) {
   let newState = Object.assign({}, state);
 
   switch (action.type) {
-  case 'MODEL_INPUT_VALIDATION':
+  case MODEL_INPUT_VALIDATION:
     let inputState = newState[action.component][action.model][action.inputName] || {};
     newState[action.component][action.model][action.inputName] = {
       ...inputState,
@@ -13,7 +15,7 @@ export default function validation(state = initialState, action) {
     return newState;
 
 
-  case 'MODEL_COMPONENT_DEFAULT_STATE':
+  case MODEL_COMPONENT_DEFAULT_STATE:
     return {
       ...state,
       [action.component]: {
@@ -21,7 +23,7 @@ export default function validation(state = initialState, action) {
       },
     };
 
-  case 'MODEL_FORM_VALIDATION':
+  case MODEL_FORM_VALIDATION:
     let modelState = newState[action.component][action.model];
     newState[action.component][action.model] = {
       ...modelState,

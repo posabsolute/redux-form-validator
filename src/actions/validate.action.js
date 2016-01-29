@@ -3,7 +3,7 @@ import {MODEL_COMPONENT_DEFAULT_STATE} from './types/validate.types';
 
 export function setDefaultValidatorState(component, model) {
   return {
-    type: 'MODEL_COMPONENT_DEFAULT_STATE',
+    type: MODEL_COMPONENT_DEFAULT_STATE,
     component,
     model,
   };
