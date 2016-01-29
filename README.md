@@ -7,7 +7,7 @@ About controlled inputs:  [My controlled input dilemma with react & redux](http:
 
 Demo: [Live Example](http://posabsolute.github.io/redux-form-validator-example/) | [Source](https://github.com/posabsolute/redux-form-validator-example)
 
-Better Documentation: [http://posabsolute.github.io/redux-form-validator](http://posabsolute.github.io/redux-form-validator)
+Documentation: [http://posabsolute.github.io/redux-form-validator](http://posabsolute.github.io/redux-form-validator)
 
 
 ## Integration
