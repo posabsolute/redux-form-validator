@@ -1,8 +1,12 @@
 {
   "name": "redux-form-validator",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Form validation for redux",
   "main": "index.js",
+  "format" : "es6",
+  "jspm": {
+    "format" : "es6",
+  }
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,11 +14,12 @@
     "redux",
     "react-component",
     "form",
+    "react-component"
     "validation",
     "react"
   ],
   "author": {
-    "name": "Cedruc Dugas"
+    "name": "Cedric Dugas"
   },
   "bugs": {
     "url": "https://github.com/posabsolute/redux-form-validator/issues"

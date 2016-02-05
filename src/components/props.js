@@ -7,11 +7,7 @@
 
 import classNames from 'classnames/bind';
 
-const validate = (
-  component,
-  model,
-  validatorName,
-) => {
+const validate = (component, model, validatorName) => {
 
   function getComponentName() {
     return validatorName || component.constructor.name;
