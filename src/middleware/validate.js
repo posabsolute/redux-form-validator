@@ -111,7 +111,10 @@ export default store => next => action => {
     // get input state
     if(!modelData || !modelData.validate){
       console.warn('undefined validation rules for ' + name);
-      return true;
+      return {
+        isValid : true,
+        value: value,
+      };
     }
     
     let inputState = validateRules(modelData.validate, value, inputData, inputType);
@@ -153,7 +156,7 @@ export default store => next => action => {
     dispatchInputAction(inputState, name);
     return {
       isValid : inputState.valid,
-      value: value
+      value: value,
     };
   }
 
@@ -263,7 +266,6 @@ export default store => next => action => {
      */
     function handleInputsPromises() {
       if (formState.isPromise) {
-        console.log(formState)
         // is we already know the form is not valid form sync input validation, reject
         // we also validate the global model sync validation
         // we must reject an empty promise, you cannot reject Promise.all manually
