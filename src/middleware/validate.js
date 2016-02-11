@@ -151,7 +151,28 @@ export default store => next => action => {
     // in case we are not in a promise, dispatch input state
     // & return input validity, so it can be used in component code. if(this.validateInput('username')){}
     dispatchInputAction(inputState, name);
-    return inputState.valid;
+    return {
+      isValid : inputState.valid,
+      value: value
+    };
+  }
+
+/**
+   * getFormValues(form.elements)
+   * return form values
+   * 
+   * @param {form} form.elements -html5 form elements
+   * @return {object} formValues - all form values
+   */
+  function getFormValues(formElements = form) {
+    let formValues = {};
+    Object.keys(formElements).forEach( input => {
+      // form.elements contain both a numeric and named object for the same input
+      // use the named only
+      if(!isNaN(input)){return;}
+      formValues[input] = form[input].value;
+    });
+    return formValues;
   }
   /**
    * validateForm()
@@ -194,7 +215,10 @@ export default store => next => action => {
     }
     dispatchFormAction(formState);
     // not async return a bool to the component
-    return formState.valid;
+    return {
+      isValid: formState.valid,
+      inputs: getFormValues(),
+    }
     /**
      * validateInputs()
      * iterate on form.elements & validate all inputs
@@ -207,7 +231,7 @@ export default store => next => action => {
         if(!isNaN(input)){return;}
         const inputState = validateInput( input, form[input].value, form[input]);
         // if return a bool false
-        if (!inputState) {
+        if (!inputState.isValid && !inputState.then) {
           formState.valid = false;
         }
         // if return a promise we add the promise to array for later use of promise.all()
@@ -225,7 +249,6 @@ export default store => next => action => {
      * @return {Promise} formState.async.promise
      */
     function rejectPromise() {
-      dispatchFormAsyncAction(false);
       formState.async.reject();
       formState.valid = false;
       dispatchFormAction(formState);
