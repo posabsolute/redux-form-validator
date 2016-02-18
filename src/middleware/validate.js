@@ -131,6 +131,7 @@ export default store => next => action => {
       inputState.promise.promise.then(() =>{
         inputState.state = 'done';
         inputState.valid = true;
+        inputState.message = '';
         dispatchInputAction(inputState, name);
       })
       // if validation fails because of another validation rule or
@@ -153,6 +154,9 @@ export default store => next => action => {
     }
     // in case we are not in a promise, dispatch input state
     // & return input validity, so it can be used in component code. if(this.validateInput('username')){}
+    if(inputState.valid){
+      inputState.message = '';
+    }
     dispatchInputAction(inputState, name);
     return {
       isValid : inputState.valid,
@@ -169,12 +173,12 @@ export default store => next => action => {
    */
   function getFormValues(formElements = form) {
     let formValues = {};
-    Object.keys(formElements).forEach( input => {
-      // form.elements contain both a numeric and named object for the same input
-      // use the named only
-      if(!isNaN(input)){return;}
-      formValues[input] = form[input].value;
-    });
+
+    for (let i=0; i<formElements.length; i++){
+      if(formElements[i].name){
+        formValues[formElements[i].name] = formElements[i].value;
+      }
+    }
     return formValues;
   }
   /**
@@ -227,8 +231,9 @@ export default store => next => action => {
      * iterate on form.elements & validate all inputs
      */
     function validateInputs() {
+      const elements = getFormValues();
       // validate for each input
-      Object.keys(form).forEach( input => {
+      Object.keys(elements).forEach( input => {
         // form.elements contain both a numeric and named object for the same input
         // use the named only
         if(!isNaN(input)){return;}
