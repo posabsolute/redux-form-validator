@@ -46,15 +46,6 @@ export default {
     }
     return true;
   },
-  // Acceptance validator
-  // Validates that something has to be accepted, e.g. terms of use
-  // true or 'true' are valid
-  acceptance(value) {
-    if (value != true) {
-      return false;
-    }
-    return true;
-  },
   // minChecked validator
   // Validate that the checkbox group has a minimum of box checked
   // the min value specified
