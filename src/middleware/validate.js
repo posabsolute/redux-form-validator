@@ -4,7 +4,7 @@
  * Do the calidation heavy-lifting
  */
 import validateFuncs from './validate-validators';
-import defautMessages from './validate-default-messages';
+import defaultMessages from './validate-default-messages';
 import {Deferred} from './validate-utils';
 
 export const VALIDATE = Symbol('Validate');
@@ -45,8 +45,11 @@ export default store => next => action => {
           input.isPromise = true;
           input.promise = validation;
         }
+
         // if we have an error
-        if (!validation) {
+        // validation can either be false
+        // or an error message string
+        if (validation !== true) {
           input.valid = false;
           // add the errored rule to store
           input.rules.push(rule);
@@ -55,8 +58,9 @@ export default store => next => action => {
             rule: rules[rule],
           };
           input.message = rules.message ||
-                          (defautMessages[rule] && defautMessages[rule](messages)) ||
-                          (defautMessages[rules[rule]] && defautMessages[rules[rule]](messages));
+                          (defaultMessages[rule] && defaultMessages[rule](messages)) ||
+                          (defaultMessages[rules[rule]] && defaultMessages[rules[rule]](messages)) ||
+                          validation;
         }
       }
     });
