@@ -1,7 +1,7 @@
 /*!
  * Redux-form-validation
  * Validate Middleware
- * Do the calidation heavy-lifting
+ * Do the validation heavy-lifting
  */
 import validateFuncs from './validate-validators';
 import defaultMessages from './validate-default-messages';
