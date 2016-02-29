@@ -146,9 +146,16 @@ export default {
   // Validates that the value has to match the pattern specified.
   // Can be a regular expression or the name of one of the built in patterns
   pattern(value, rule) {
-    if (!value || !value.toString().match(defaultPatterns[rule] || rule)) {
+    // Don' validate empty inputs.
+    if (!value || value.length === 0) {
+      return true;
+    }
+
+    if (!value.toString().match(defaultPatterns[rule] || rule)) {
       return false;
     }
+
     return true;
   },
 };
+
